@@ -14,59 +14,25 @@ var config = {
 firebase.initializeApp(config);
 
 class App extends React.Component {
-  render() {
-    return (
-      <div>
-        <Header />
-        <SearchForm />
-        <APIcall />
-      </div>
-    )
-  }
-}
-
-class SearchForm extends React.Component {
   constructor() {
     super();
     this.state = {
-      searchTerm: ''
+      search: ''
     }
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.passSearch = this.passSearch.bind(this);
   }
-  handleChange(e) {
+  passSearch(word) {
+    const search = word;
     this.setState({
-      searchTerm: e.target.value
-    })
-  }
-  handleSubmit(e) {
-    e.preventDefault();
-
-    const searchTerm = this.state.searchTerm;
-
-    console.log(searchTerm);
-
-    this.setState({
-      searchTerm
+      search
     })
   }
   render() {
     return (
       <div>
-        <form
-          action=""
-          onSubmit={this.handleSubmit}
-          role="search">
-          <input
-            id="search"
-            name="q"
-            onChange={this.handleChange}
-            size="40"
-            type="search"
-            placeholder="State your problem in one word or less"
-            value={this.state.searchTerm} />
-          <button type="submit">Help Me</button>
-        </form>
+        <h1>Good Idea | Bad Idea</h1>
+        <SearchForm submitForm={this.passSearch}/>
+        <APIcall />
       </div>
     )
   }
@@ -104,11 +70,46 @@ class APIcall extends React.Component {
   }
 }
 
-class Header extends React.Component {
+class SearchForm extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      searchTerm: ''
+    }
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleChange(e) {
+    this.setState({
+      searchTerm: e.target.value
+    })
+  }
+  handleSubmit(e) {
+    e.preventDefault();
+
+    this.props.submitForm(this.state.searchTerm);
+
+    this.setState({
+      searchTerm: ''
+    })
+  }
   render() {
     return (
       <div>
-        <h1>Good Idea | Bad Idea</h1>
+        <form
+          action=""
+          onSubmit={this.handleSubmit}
+          role="search">
+          <input
+            id="search"
+            name="q"
+            onChange={this.handleChange}
+            size="40"
+            type="search"
+            placeholder="State your problem in one word or less"
+            value={this.state.searchTerm} />
+          <button type="submit">Help Me</button>
+        </form>
       </div>
     )
   }
