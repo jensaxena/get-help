@@ -25,19 +25,26 @@ class App extends React.Component {
     const apiURL = `http://api.adviceslip.com/advice/search/${word}`;
 
     axios.get(`${apiURL}`).then((res)=> {
-      const searchResult = res.data.slips;
 
-      let i = 0;
-      while (i < searchResult) {
-        Math.floor(Math.random()*searchResult.length);
-        i++;
+      const responseData = res.data;
+
+      if ('slips' in responseData) {
+        const searchResult = res.data.slips;
+        let i = 0;
+        while (i < searchResult) {
+          Math.floor(Math.random()*searchResult.length);
+          i++;
+        }
+
+        const advice = searchResult[i].advice;
+
+        this.setState({
+          search: advice
+        })
+      } else if ('message' in responseData) {
+        console.log('there');
+        const dbRef = firebase.database().ref();
       }
-
-      const advice = searchResult[i].advice;
-
-      this.setState({
-        search: advice
-      })
     })
   }
   render() {
