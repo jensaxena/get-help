@@ -19,52 +19,33 @@ class App extends React.Component {
     this.state = {
       search: ''
     }
-    this.passSearch = this.passSearch.bind(this);
+    this.doSearch = this.doSearch.bind(this);
   }
-  passSearch(word) {
-    const search = word;
-    this.setState({
-      search
-    })
-  }
-  render() {
-    return (
-      <div>
-        <h1>Good Idea | Bad Idea</h1>
-        <SearchForm submitForm={this.passSearch}/>
-        <APIcall />
-      </div>
-    )
-  }
-}
-
-class APIcall extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      goodAdvice: ''
-    }
-  }
-  componentDidMount() {
-
-    // returns random slip
-    // add /search/{query} for search
-    const apiURL = `http://api.adviceslip.com/advice`;
+  doSearch(word) {
+    const apiURL = `http://api.adviceslip.com/advice/search/${word}`;
 
     axios.get(`${apiURL}`).then((res)=> {
-      const goodAdvice = res.data.slip.advice;
+      const searchResult = res.data.slips;
+
+      let i = 0;
+      while (i < searchResult) {
+        Math.floor(Math.random()*searchResult.length);
+        i++;
+      }
+
+      const advice = searchResult[i].advice;
 
       this.setState({
-        goodAdvice
+        search: advice
       })
     })
   }
   render() {
     return (
       <div>
-        <p>
-          {this.state.goodAdvice}
-        </p>
+        <h1>Good Idea | Bad Idea</h1>
+        <SearchForm submitForm={this.doSearch}/>
+        <p>{this.state.search}</p>
       </div>
     )
   }
@@ -106,7 +87,7 @@ class SearchForm extends React.Component {
             onChange={this.handleChange}
             size="40"
             type="search"
-            placeholder="State your problem in one word or less"
+            placeholder="Enter a word, receive a pearl of wisdom"
             value={this.state.searchTerm} />
           <button type="submit">Help Me</button>
         </form>
