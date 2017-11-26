@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 
+import Footer from './footer';
 import SearchForm from './search-form';
 
 class App extends React.Component {
@@ -31,7 +32,7 @@ class App extends React.Component {
           const searchResults = res.data.slips;
           let rando = Math.floor(Math.random()*searchResults.length);
           const goodAdvice = searchResults[rando].advice;
-          const goodHeader = 'Good Idea';
+          const goodHeader = 'Good Idea.';
           this.setState({ search: goodAdvice });
           this.setState({ header: goodHeader });
         } // if ()
@@ -120,12 +121,15 @@ class App extends React.Component {
   }; // doSearch()
   render() {
     return (
-      <div>
+      <div className="wrapper">
         <h1>{this.state.header}</h1>
         <SearchForm submitForm={this.doSearch}/>
-        <p>{this.state.error}</p>
-        <p>{this.state.search}</p>
-      </div>
+        <div className="result">
+          <p>{this.state.error}</p>
+          <p className="idea">{this.state.search}</p>
+        </div> {/* result */}
+        <Footer />
+      </div> // .wrapper
     ); // return
   }; // render()
 }; // class App
