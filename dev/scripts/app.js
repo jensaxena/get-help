@@ -98,7 +98,67 @@ class App extends React.Component {
             {
               id: "i015",
               value: "Just walk it off."
-            }
+            },
+            {
+              id: "i016",
+              value: "Tell your teacher that the dog ate it."
+            },
+            {
+              id: "i017",
+              value: "Giving up is easy. Never starting is even easier."
+            },
+            {
+              id: "i018",
+              value: "Honesty is a virtue, so tell everyone what you really think of them."
+            },
+            {
+              id: "i019",
+              value: "Studying is a waste of time, you'll never use any of that stuff in the real world."
+            },
+            {
+              id: "i020",
+              value: "You have to bite the dog back to show dominance."
+            },
+            {
+              id: "i021",
+              value: "One more shot of tequila couldn't hurt."
+            },
+            {
+              id: "i022",
+              value: "There are no stupid questions, only stupid people."
+            },
+            {
+              id: "i023",
+              value: "Live like you might die tomorrow. Because you might. You could die. Tomorrow. Seriously."
+            },
+            {
+              id: "i024",
+              value: "Animals have better instincts than people. So, just don't eat anything the dog wouldn't."
+            },
+            {
+              id: "i025",
+              value: "If you often find yourself running late for important events, just stop making plans in the first place."
+            },
+            {
+              id: "i026",
+              value: "Just be yourself. If that doesn't work, you might be fundamentally unlikeable."
+            },
+            {
+              id: "i027",
+              value: "Death is the last great adventure. Start making preparations now, you wouldn't want to get left behind."
+            },
+            {
+              id: "i028",
+              value: "If you're going to lie to somebody, be sure to throw in a lot of unnecessary details to make your story more believable."
+            },
+            {
+              id: "i029",
+              value: "All cats love to have their bellies rubbed."
+            },
+            {
+              id: "i030",
+              value: "Wishing for a relaxing beach vacation? Try putting some sand in the bathtub."
+            },
           ]; // const ideaList
 
           let i = 0;
@@ -106,8 +166,7 @@ class App extends React.Component {
             let badAdvice = '';
             const badHeader = 'Bad Idea.';
             if (ideaList[i].value.toLowerCase().includes(`${word}`) === false) {
-              let rando = Math.floor(Math.random()*ideaList.length);
-              badAdvice = ideaList[rando].value;
+              badAdvice = 'Sorry, we\'ve got nothing. Try being a little less weird next time, maybe.';
             } // if ()
 
             else { badAdvice = ideaList[i].value };

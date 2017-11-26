@@ -17,7 +17,7 @@ $tinyType: calc(1rem + (3 - 1) * ((100vw - 300px) / (1600 - 300)));
   align-items: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   text-align: center;
 }
 
@@ -27,15 +27,14 @@ html {
 }
 
 body {
-  color: $darkColor;
   background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../images/bg-wallpaper-greyscale-2000x1334.jpg') no-repeat top center;
 }
 
 .wrapper {
   @include flexY;
-  min-height: calc(100vh - 10rem);
-  margin: 5rem auto;
-  max-width: 95vw;
+  margin: 1rem auto;
+  max-width: 90vw;
+  min-height: calc(100vh - 2rem);
   min-width: 300px;
 }
 
@@ -69,6 +68,7 @@ h1 {
   font-size: $hugeType;
   font-weight: 400;
   margin: 0;
+  text-shadow: 1px 2px 0 $accentColor;
 }
 
 div.result {
@@ -79,7 +79,13 @@ p {
   font-size: $smallType;
 }
 p.idea {
+  color: $lightColor;
   font-size: $largeType;
+  text-shadow:
+    1px 1px 0 $darkColor,
+    1px -1px 0 $darkColor,
+    -1px -1px 0 $darkColor,
+    -1px 1px 0 $darkColor;
 }
 
 form {
@@ -87,6 +93,7 @@ form {
 }
 button {
   border-radius: 5rem;
+  font-size: $largeType;
   margin-top: 1.5rem;
 }
 button,
@@ -95,7 +102,6 @@ input {
   background: rgba(255,255,255,0.75);
   border: none;
   font-family: $contentFont;
-  font-size: $largeType;
   padding: 1rem 2rem;
 }
 button:focus,
@@ -106,5 +112,13 @@ input:hover {
 }
 input {
   border-radius: 1rem;
-  width: 90vw;
+  display: block;
+  font-size: $smallType;
+  width: 65vw;
+}
+
+@media screen and (max-width: 600px) {
+  .wrapper {
+    justify-content: flex-start;
+  }
 }
