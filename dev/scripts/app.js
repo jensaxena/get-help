@@ -161,19 +161,30 @@ class App extends React.Component {
             },
           ]; // const ideaList
 
+          const badHeader = 'Bad Idea.';
+          const badChoices = [];
+          let badAdvice = '';
+
           let i = 0;
           while (i < ideaList.length) {
-            let badAdvice = '';
-            const badHeader = 'Bad Idea.';
-            if (ideaList[i].value.toLowerCase().includes(`${word}`) === false) {
-              badAdvice = 'Sorry, we\'ve got nothing. Try being a little less weird next time, maybe.';
-            } // if ()
-
-            else { badAdvice = ideaList[i].value };
+            if (ideaList[i].value.toLowerCase().includes(`${word}`) === true) {
+              badChoices.push(ideaList[i].value);
+            } // if()
             i++;
-            this.setState({ search: badAdvice });
-            this.setState({ header: badHeader });
           }; // while ()
+
+          if (badChoices.length !== 0) {
+            let rando = Math.floor(Math.random()*badChoices.length);
+            let badAdvice = badChoices[rando];
+            this.setState({ search: badAdvice });
+          } // if()
+          else {
+            let badAdvice = 'Sorry, we\'ve got nothing. Try being a little less weird next time, maybe.';
+            this.setState({ search: badAdvice });
+          } // else()
+
+          this.setState({ header: badHeader });
+
         }; // else if ()
       }); // axios.get
     }; // else()
